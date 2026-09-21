@@ -1,17 +1,17 @@
 const {getDB } = require('./../configs/db');
 
-const getFees  = async (req, res) =>{
+const getFees  = async (req, res , next) =>{
   try{
     const db = getDB();
     const [fees] = await db.query("SELECT *FROM fees");
     res.json(fees);
   }
   catch(error){
-    res.json({message  : "failed to fetch th fees details"});
+   next(error);
   }
 }
 
-const addfees = async (req, res) =>{
+const addfees = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "INSERT INTO fees (class_id , student_id , total_fees , date_of_payment , balance_due) VALUES (?,?,?,?,?)";
@@ -20,12 +20,12 @@ const addfees = async (req, res) =>{
     res.json(fees);
   }
   catch(error){
-    res.json({message :"failed to add the fees details"});
+   next(error);
   }
 }
 
 
-const updatefees = async (req, res) =>{
+const updatefees = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "UPDATE fees SET class_id = ? , student_id = ? , total_fees = ? , date_of_payment = ? , balance_due = ? WHERE fees_id = ?";
@@ -33,11 +33,11 @@ const updatefees = async (req, res) =>{
     res.json(fees);
   }
   catch(error){
-    res.json({message : "failed to update the fees details"});
+   next(error);
   }
 }
 
-const deletefees = async (req, res) =>{
+const deletefees = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "DELETE FROM fees WHERE fees_id = ?";
@@ -45,7 +45,7 @@ const deletefees = async (req, res) =>{
     res.json(fees);
   }
   catch(error){
-    res.json({message : "failed to delete the fees details"});
+   next(error);
   }
 }
 

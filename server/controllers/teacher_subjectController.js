@@ -1,17 +1,17 @@
 const {getDB} = require('./../configs/db');
 
-const getTeacher_subject = async ( req , res) =>{
+const getTeacher_subject = async ( req, res , next) =>{
   try{
     const db = getDB();
     const [teacher_subject] = await db.query("SELECT * FROM teacher_subjects");
     res.json(teacher_subject);
   }
   catch(error){
-    res.json({message  :" Failed to get the details"});
+   next(error);
   }
 }
 
-const addTeacher_subject = async (req, res) =>{
+const addTeacher_subject = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "INSERT INTO teacher_subjects (teacher_id , subject_id ) VALUES (?,?)";
@@ -19,11 +19,11 @@ const addTeacher_subject = async (req, res) =>{
     res.json(teacher_subject);
   }
   catch(error){
-    res.json({message : "failed to add the teacher_subject"});
+   next(error);
   }
 }
 
-const updateTeacher_subject = async (req , res) =>{
+const updateTeacher_subject = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "UPDATE teacher_subjects SET teacher_id = ? , subject_id = ? WHERE teacher_subject_id = ?";
@@ -32,19 +32,19 @@ const updateTeacher_subject = async (req , res) =>{
     res.json(teacher_subject);
   }
   catch(error){
-    res.json({message : "failed to update the teacher_subject details"});
+   next(error);
   }
 }
 
-const deleteTeacher_subject = async (req , res) =>{
+const deleteTeacher_subject = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "DELETE FROM teacher_subjects WHERE teacher_subject_id = ? ";
     const [teacher_subject] = await db.query(query , [req.params.id]);
     res.json(teacher_subject);
   }
-  catch(error){
-    res.json({message : "failed to delete the teacher_subject details"});
+ catch(error){
+   next(error);
   }
 }
 

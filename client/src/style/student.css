@@ -1,0 +1,15 @@
+.student-bar{
+  padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student-table{
+  margin:  0;
+  padding: 6px;
+}
+.add-form{
+  border: 1;
+  border-color: black;
+  padding: 12px;
+}

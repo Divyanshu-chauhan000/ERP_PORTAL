@@ -1,6 +1,6 @@
 const {getDB} = require('./../configs/db');
 
-const getallsubjects = async (req, res) =>{
+const getallsubjects = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "SELECT * FROM subjects ";
@@ -9,11 +9,11 @@ const getallsubjects = async (req, res) =>{
     res.json(subjects);
   }
   catch(error){
-    res.json({message : "failed to fetch all subjects"});
+   next(error);
   }
 }
 
-const addsubject = async (req, res) =>{
+const addsubject = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "INSERT INTO subjects (subject_name) VALUES (?)";
@@ -21,12 +21,12 @@ const addsubject = async (req, res) =>{
     const[subjects] = await db.query(query ,[ req.body.subject_name]);
     res.json(subjects);
   }
-  catch(error){
-    res.json({message : "failed to add subject"});
+catch(error){
+   next(error);
   }
 }
 
-const updatesubject = async (req , res) =>{
+const updatesubject = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "UPDATE subjects SET subject_name = ? WHERE subject_id = ?";
@@ -34,12 +34,12 @@ const updatesubject = async (req , res) =>{
     const [subjects ] = await db.query(query , [req.body.subject_name , req.params.id]);
     res.json(subjects);
   }
-  catch(error){
-    res.json({message : "failed to update subject"});
+ catch(error){
+   next(error);
   }
 }
 
-const deletesubject = async (req, res) =>{
+const deletesubject = async (req, res , next) =>{
   try{
     const db = getDB();
 
@@ -48,8 +48,8 @@ const deletesubject = async (req, res) =>{
     const [subjects] = await db.query(query , [req.params.id]);
     res.json(subjects);
   }
-  catch(error){
-    res.json({message  : "failed to delete the subject"});
+ catch(error){
+   next(error);
   }
 }
 

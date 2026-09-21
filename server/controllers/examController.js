@@ -1,17 +1,17 @@
 const {getDB} = require('./../configs/db');
 
-const getExams = async (req, res) =>{
+const getExams = async (req, res , next) =>{
   try{
     const db = getDB();
     const [exams] = await db.query("SELECT * FROM exams");
     res.json(exams);
   }
   catch(error){
-    res.json({message : "failed to fetch the exam details "});
+   next(error);
   }
 }
 
-const addExams = async (req , res) =>{
+const addExams = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "INSERT INTO exams (exam_type , class_id , student_id , subject_id , marks , max_marks , exam_date ) VALUES (?,?,?,?,?,?,?)";
@@ -20,11 +20,11 @@ const addExams = async (req , res) =>{
     res.json(exams);
   }
   catch(error){
-    res.json({message : "failed to add exam details"});
+   next(error);
   }
 }
 
-const updateExams = async (req, res) =>{
+const updateExams = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "UPDATE exams SET exam_type = ? , class_id = ? , student_id = ? subject_id = ? , marks = ? , max_marks = ? , exam_date = ? WHERE exam_id = ? ";
@@ -33,12 +33,12 @@ const updateExams = async (req, res) =>{
     res.json(exams);
   }
   catch(error){
-    res.json({message : "failed to update the exam details"});
+   next(error);
   }
 }
 
 
-const deleteExams = async (req, res) =>{
+const deleteExams = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "DELETE FROM exams WHERE exam_id = ?";
@@ -46,7 +46,7 @@ const deleteExams = async (req, res) =>{
     res.json(exams);
   }
   catch(error){
-    res.json({message : "failed to delete the exam details"});
+   next(error);
   }
 }
 

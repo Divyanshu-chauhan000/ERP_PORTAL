@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-const login = async (req , res) =>{
+const login = async (req, res , next) =>{
 
   try{
   const db = getDB();
@@ -37,8 +37,8 @@ const login = async (req , res) =>{
     
   }
   }
-  catch(error){
-    res.json({message : "Failed to Log in "});
+ catch(error){
+   next(error);
   }
 
 

@@ -1,17 +1,17 @@
 const {getDB} = require('./../configs/db');
 const bcrypt = require('bcryptjs');
 
-const getAllusers = async (req , res) =>{
+const getAllusers = async (req, res , next) =>{
   try{
     const db = getDB();
     const [users] = await db.query("SELECT * FROM users");
     res.json(users);
   }
   catch(error){
-    res.json({message :"Failed to gett all the users"});
+   next(error);
   }
 }
-const addusers = async (req , res) =>{
+const addusers = async (req, res , next) =>{
   try{
     const db = getDB();
     const hashpassword = await bcrypt.hash(req.body.password , 10);
@@ -20,11 +20,11 @@ const addusers = async (req , res) =>{
     res.json(users);
   }
   catch(error){
-    res.json({message :"Failed to add the user"});
+   next(error);
   }
 }
 
-const updateusers = async (req , res) =>{
+const updateusers = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "UPDATE users SET username = ? , password = ? , role = ? , student_id = ? , teacher_id = ? WHERE user_id = ?";
@@ -32,12 +32,12 @@ const updateusers = async (req , res) =>{
     res.json(users);
   }
   catch(error){
-    res.json({message :"Failed to update the user"});
+   next(error);
   }
 }
 
 
-const deleteusers = async (req , res) =>{
+const deleteusers = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "DELETE FROM users WHERE user_id = ?";
@@ -45,7 +45,7 @@ const deleteusers = async (req , res) =>{
     res.json(users);
   }
   catch(error){
-    res.json({message :"Failed to delete the user"});
+   next(error);
   }
 }
 

@@ -1,6 +1,6 @@
 const {getDB} = require('./../configs/db');
 
-const getattendence = async (req, res) =>{
+const getattendence = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "SELECT * FROM attendences";
@@ -8,24 +8,24 @@ const getattendence = async (req, res) =>{
     res.json(attendences);
   }
   catch(error){
-    res.json({message  : "failed to fetch the attendence"});
+   next(error);
   }
 }
 
-const addattendence = async (req, res) =>{
+const addattendence = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "INSERT INTO attendences (class_id , student_id , teacher_id , date , attendence_status) VALUES (?,?,?,?,?)";
     const [attendences ] = await db.query(query , [req.body.class_id , req.body.student_id , req.body.teacher_id , req.body.date , req.body.attendence_status]);
     res.json(attendences);
   }
-  catch(error){
-    res.json({message  : "failed to add the attendence"});
+ catch(error){
+   next(error);
   }
 }
 
 
-const updateattendence = async (req , res) =>{
+const updateattendence = async (req, res , next) =>{
   try{
     const db = getDB();
     query = " UPDATE attendences SET class_id = ? , student_id = ? , teacher_id = ? , date = ? , attendence_status = ? WHERE attendence_id = ? ";
@@ -33,12 +33,12 @@ const updateattendence = async (req , res) =>{
     
     res.json(attendences);
   }
-  catch(error){
-    res.json({message : "failed to update the attendence "});
+ catch(error){
+   next(error);
   }
 }
 
-const deleteattendence = async (req , res) =>{
+const deleteattendence = async (req, res , next) =>{
   try{
     const db = getDB();
     query = "DELETE FROM attendences WHERE attendence_id = ? ";
@@ -46,7 +46,7 @@ const deleteattendence = async (req , res) =>{
     res.json(attendences);
   }
   catch(error){
-    res.json({message : "failed to delete the attendence"});
+   next(error);
   }
 }
 
