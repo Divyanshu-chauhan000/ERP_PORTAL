@@ -12,6 +12,7 @@ import Student from './pages/Student';
 import Subject from './pages/Subject';
 import Teachers from './pages/Teachers';
 import AddStudent from './components/AddStudent';
+import UpdateStudent from './components/UpdateStudent';
 
 export default function App() {
 
@@ -29,6 +30,7 @@ export default function App() {
 
 
       <Route path='/addstudent' element={<AddStudent/>} />
+      <Route path='/edistudent' element={<UpdateStudent/>} />
     </Routes>
   )
 }

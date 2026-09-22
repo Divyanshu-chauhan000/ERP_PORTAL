@@ -65,7 +65,7 @@ export default function Student() {
                 <td>{student.student_contact}</td>
                 <td>{student.student_admission_date}</td>
                 <td>{student.class_id}</td>
-                <td><button style={{width: '100%'}} onClick={() => handleDelete(student.student_id)}>Delete</button></td>
+                <td><button style={{width: '50%'}} onClick={() => handleDelete(student.student_id)}>Delete</button>  <button onClick={() => navigate('/editstudent', {state : student})}>Edit Student</button></td>
                </tr>
              ))
             }
