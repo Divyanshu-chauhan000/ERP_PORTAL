@@ -14,23 +14,25 @@ import Teachers from './pages/Teachers';
 import AddStudent from './components/AddStudent';
 import UpdateStudent from './components/UpdateStudent';
 
+import ProtectedRoute from './components/ProtectedRoute';
+
 export default function App() {
 
   return (
     <Routes>
       <Route path='/login' element={<Login/>} />
-      <Route path='/dashboard' element={<Dashboard/>} />
-      <Route path='/attendences' element={<Attendence/>} />
-      <Route path='/classes' element={<Class/>}/>
-      <Route path='/exams' element={<Exam/>} />
-      <Route path='/fees' element={<Fees/>} />
-      <Route path='/students' element={<Student/>} />
-      <Route  path='/subjects' element={<Subject/>}/>
-      <Route path='/teachers' element={<Teachers/>} />
+      <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
+      <Route path='/attendences' element={<ProtectedRoute><Attendence/></ProtectedRoute>} />
+      <Route path='/classes' element={<ProtectedRoute><Class/></ProtectedRoute>}/>
+      <Route path='/exams' element={<ProtectedRoute><Exam/></ProtectedRoute>} />
+      <Route path='/fees' element={<ProtectedRoute><Fees/></ProtectedRoute>} />
+      <Route path='/students' element={<ProtectedRoute><Student/></ProtectedRoute>} />
+      <Route  path='/subjects' element={<ProtectedRoute><Subject/></ProtectedRoute>}/>
+      <Route path='/teachers' element={<ProtectedRoute><Teachers/></ProtectedRoute>} />
 
 
-      <Route path='/addstudent' element={<AddStudent/>} />
-      <Route path='/edistudent' element={<UpdateStudent/>} />
+      <Route path='/addstudent' element={<ProtectedRoute><AddStudent/></ProtectedRoute>} />
+      <Route path='/editstudent' element={<ProtectedRoute><UpdateStudent/></ProtectedRoute>} />
     </Routes>
   )
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../style/student.css'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import api from '../api/axios';
 
 
 
@@ -14,16 +15,17 @@ export default function UpdateStudent() {
     const navigate = useNavigate();
 
     const [studentName , setStudentname] = useState(student.student_name);
-    const [studentDob , setStudentdob] = useState(student.student_dob);
+    const [studentDob , setStudentdob] = useState(student.student_dob.slice(0,10));
     const [studentGender , setStudentGender] = useState(student.student_gender);
     const [studentAddress , setStudentAddress] = useState(student.student_address);
     const [studentContact , setStudentContact] = useState(student.student_contact);
-    const [studentAdmissionDate , setStudentAdmissionDate] = useState(student.student_admission_date);
+    const [studentAdmissionDate , setStudentAdmissionDate] = useState(student.student_admission_date.slice(0,10));
     const [ classId , setClassId] = useState(student.class_id); 
 
-    const handleSubmit = async () =>{
+    const handleSubmit = async (e) =>{
+      e.preventDefault();
         try{
-       const response = await axios.put(`http://localhost:5000/students/${student.student_id}` , {
+       const response = await api.put(`/students/${student.student_id}` , {
         student_name : studentName,
         student_dob : studentDob,
         student_gender : studentGender,

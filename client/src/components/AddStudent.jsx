@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import '../style/student.css'
 import { Form } from 'react-router-dom'
 import axios from 'axios';
+import api from '../api/axios';
 
 export default function AddStudent() {
   
@@ -16,7 +17,7 @@ export default function AddStudent() {
   const handleSubmit = async (e) =>{
     e.preventDefault();
     try{
-       const response = await axios.post('http://localhost:5000/students' , {
+       const response = await api.post('/students' , {
         student_name : studentName,
         student_dob : studentDob,
         student_gender : studentGender,

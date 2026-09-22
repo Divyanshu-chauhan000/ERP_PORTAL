@@ -1,18 +1,21 @@
 import React from 'react'
-// import api from '../api/axios'
+import api from '../api/axios'
 import '../style/student.css'
 import { useState , useEffect } from 'react';
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
+import getRole from '../utils/getRole';
 
 export default function Student() {
 
+
   const [students , setstudents] = useState([]);
   const navigate = useNavigate();
-  
+  const role = getRole();
+
   useEffect(() =>{
      const fetchStudent = async () =>{
-      const response = await axios.get('http://localhost:5000/students')
+      const response = await api.get('/students')
       setstudents(response.data);
      }
    fetchStudent();
@@ -20,7 +23,7 @@ export default function Student() {
 
   const handleDelete = async (id) =>{
     try{
-    await axios.delete(`http://localhost:5000/students/${id}`);
+    await api.delete(`/students/${id}`);
     setstudents(students.filter((student) => student.student_id !== id));
     console.log("deletion successfull")
     }
@@ -35,7 +38,11 @@ export default function Student() {
       <div className='student-bar'>
         <h2>Total Number of students </h2>
         <div>
-          <button onClick={() => navigate('/addstudent')} className='add-btn'>Add Student</button>
+          {
+            role === 'admin' && (
+              <button onClick={() => navigate('/addstudent')} className='add-btn'>Add Student</button>
+            )
+          }
         </div>
       </div>
       <ul className='student-table'>
