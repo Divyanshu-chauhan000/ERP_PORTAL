@@ -53,9 +53,24 @@ const deleteteacher = async (req, res , next) =>{
   }
 }
 
+//Total Teacher Count
+
+const getTotalTeachers = async (req , res  , next) =>{
+  try{
+    const db = getDB();
+    query = "SELECT COUNT(*) as total_teacher FROM teachers"
+    const [TotalTeachers] = await db.query(query);
+    res.json(TotalTeachers)
+  }
+  catch(error){
+    next(error);
+  }
+}
+
 module.exports = {
   getAllteachers , 
   addTeacher,
   updateTeacher,
-  deleteteacher
+  deleteteacher,
+  getTotalTeachers
 }

@@ -50,4 +50,18 @@ const deleteattendence = async (req, res , next) =>{
   }
 }
 
-module.exports = {getattendence , addattendence , updateattendence , deleteattendence};
+//individual attendence
+
+const getMyAttendence = async (req , res , next) =>{
+  try{
+    const db =  getDB();
+    query = "SELECT * FROM attendence WHERE student_id = ?"
+    const [myattendence] = await db.query(query , [req.user.student_id]);
+    res.json(myattendence)
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+module.exports = {getattendence , addattendence , updateattendence , deleteattendence ,getMyAttendence};

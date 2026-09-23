@@ -3,8 +3,15 @@ const {validationResult} = require('express-validator');
 
 const getAllstudents = async (req, res , next) =>{
  try{
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 10;
+  console.log(page , limit);
+  const offset =  (page - 1 ) * limit;
+  console.log("Page : " , page , "Limit : " , limit , "OffSet : " , offset);
+
+
   const db = getDB();
-  const [students] = await db.query("SELECT * FROM students");
+  const [students] = await db.query("SELECT * FROM students LIMIT ? OFFSET ?" , [Number(limit) , Number(offset)]);
   res.json(students);
  }
 catch(error){
@@ -70,6 +77,40 @@ const getStudentwithClass = async (req, res , next) =>{
   }
 }
 
+//student  total count  class wise 
+
+const getStudentclasswise = async ( req , res , next )=>{
+try{
+    const db = getDB();
+  query = "SELECT class_id , COUNT(*) as total_students FROM students GROUP BY class_id"
+  const [studentclasswise] = await db.query(query);
+  res.json(studentclasswise);
+}
+catch(error){
+  next(error);
+}
+}
+
+
+
+//Total count of students 
+
+const getTotalStudents = async (req ,res , next) =>{
+  try{
+    const db = getDB();
+  query = "SELECT COUNT(*) as total_students FROM students"
+  const [TotalStudents] = await db.query(query);
+  res.json(TotalStudents)
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+//get students complete info 
+
+
+
 module.exports = {
-  getAllstudents , addAllstudents , updateStudent , deleteStudent , getStudentwithClass
+  getAllstudents , addAllstudents , updateStudent , deleteStudent , getStudentwithClass , getStudentclasswise, getTotalStudents
 }

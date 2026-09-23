@@ -8,4 +8,6 @@ router.post('/' ,verifyToken, attendenceController.addattendence);
 router.put('/:id' ,verifyToken, attendenceController.updateattendence);
 router.delete('/:id' ,verifyToken, attendenceController.deleteattendence);
 
+router.get('/me' , verifyToken , attendenceController.getMyAttendence);
+  
 module.exports = router;
