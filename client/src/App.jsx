@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path='/' element={<Login/>} />
+      <Route path='/*' element={<Login/>} />
       <Route element={<Layout/>}>
       <Route path='/dashboard' element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
       <Route path='/attendences' element={<ProtectedRoute><Attendence/></ProtectedRoute>} />

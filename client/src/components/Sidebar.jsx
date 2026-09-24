@@ -10,8 +10,11 @@ import {
   MdAccountCircle,
   MdLogout
 } from 'react-icons'
+import { useNavigate } from 'react-router-dom'
 
 function Sidebar() {
+
+  const navigate = useNavigate();
   
   const menuItems = [
     {
@@ -55,7 +58,17 @@ function Sidebar() {
   
   return (
     <div>
-      
+      {
+        menuItems.map((items) =>{
+          const Icon = items.icon;
+          return (
+            <div key={items.path} onClick={() => navigate('/items.path')}>
+                 <Icon size={20} />
+                 <span>{items.label}</span>
+            </div>
+          )
+        })
+      }
     </div>
   )
 }
