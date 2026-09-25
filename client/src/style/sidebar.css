@@ -1,0 +1,71 @@
+.sidebar{
+  width: 250px;
+  background-color: #1e3a5f;
+  color: white;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: fixed;
+  left: 0;
+  top: 0;
+
+}
+
+.side-head{
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+
+}
+
+.side-head h2{
+  margin : 0;
+  font-size: 20px;
+  font-weight: 600px;
+  display: flex;
+  gap :10px;
+  align-items: center;;
+}
+
+.side-head p{
+  margin: 5px 0;
+  font-size: 12px;
+  color: #b0b8c1;
+}
+
+.side-menu{
+  display: flex;
+  flex-direction: column;
+  gap : 10px;
+}
+
+.menu-items{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: #b0b8c1;
+}
+
+.menu-items hover{
+  background-color:  rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.menu-items.active {
+  background-color: #0066cc;
+  color: white;
+}
+
+.menu-icon{
+  font-size: 20px;
+  min-width: 24px;
+}
+.menu-label{
+  font-size: 18px;
+  font-weight: 500;
+}

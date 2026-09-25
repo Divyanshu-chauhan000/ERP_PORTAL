@@ -1,7 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import getRole from '../utils/getRole';
+import './../style/sidebar.css'
 
 function Sidebar() {
+  const role = getRole();
 
   const navigate = useNavigate();
   
@@ -46,19 +49,24 @@ function Sidebar() {
 
   
   return (
-    <div>
+ <div className='sidebar'>
+     <div className='side-head'>
+       <h2>School ERP Portal</h2>
+       <p>{role} Panel</p>
+    </div>
+    <div className='side-menu'>
       {
         menuItems.map((items) =>{
-          const Icon = items.icon;
           return (
-            <div key={items.path} onClick={() => navigate(`/${items.path}`)}>
-                 <Icon size={20} />
-                 <span>{items.label}</span>
+            <div key={items.path} className='menu-items' onClick={() => navigate(items.path)}>
+                 <span className='menu-icon'>{items.icon}</span>
+                 <span className='menu-label'>{items.label}</span>
             </div>
           )
         })
       }
     </div>
+ </div>
   )
 }
 
