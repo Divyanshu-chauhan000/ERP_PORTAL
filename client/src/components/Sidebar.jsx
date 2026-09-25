@@ -1,15 +1,4 @@
 import React from 'react'
-import {
-  MdDashboard , 
-  MdPeople,
-  MdSchool,
-  MdClass,
-  MdEventNote,
-  MdAttachMoney,
-  MdAssignmentTurnedIn,
-  MdAccountCircle,
-  MdLogout
-} from 'react-icons'
 import { useNavigate } from 'react-router-dom'
 
 function Sidebar() {
@@ -18,37 +7,37 @@ function Sidebar() {
   
   const menuItems = [
     {
-      icon : MdDashboard,
+      icon : '📊',
       label : "Dashboard",
       path : '/dashboard',
     },
      {
-      icon : MdPeople,
+      icon : '👨‍🎓',
       label : "Students",
       path : '/students',
     },
      {
-      icon : MdSchool,
+      icon : '👨‍🏫',
       label : "Teacher",
       path : '/teachers',
     },
      {
-      icon : MdClass,
+      icon : '📚',
       label : "Classes",
       path : '/classes',
     },
      {
-      icon : MdEventNote,
+      icon : '✅',
       label : "Attendence",
       path : '/attendence',
     },
      {
-      icon : MdAttachMoney,
+      icon : '💰',
       label : "Fees",
       path : '/fees',
     },
      {
-      icon : MdAssignmentTurnedIn,
+      icon : '📝',
       label : "Exams",
       path : '/exams',
     },
@@ -62,7 +51,7 @@ function Sidebar() {
         menuItems.map((items) =>{
           const Icon = items.icon;
           return (
-            <div key={items.path} onClick={() => navigate('/items.path')}>
+            <div key={items.path} onClick={() => navigate(`/${items.path}`)}>
                  <Icon size={20} />
                  <span>{items.label}</span>
             </div>
