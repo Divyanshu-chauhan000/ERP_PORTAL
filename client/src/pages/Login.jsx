@@ -17,6 +17,7 @@ export default function Login() {
         password: password,
       });
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username" ,  response.data.username)
       navigate("/dashboard");
     } catch (error) {
       console.log(error);

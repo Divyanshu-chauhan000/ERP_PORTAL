@@ -14,7 +14,7 @@ function Navbar() {
   }
   return (
     <nav className='navbar'>
-      <div className='nav-content'>
+      <div className='navbar-content'>
           <div className='nav-left'>
              <h3>Academic Year 2026-27</h3> 
           </div>

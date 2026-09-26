@@ -8,4 +8,7 @@ router.post('/' ,verifyToken, feesController.addfees);
 router.put('/:id' ,verifyToken, feesController.updatefees);
 router.delete('/:id' ,verifyToken, feesController.deletefees);
 
+router.get('/totalcollected' , verifyToken , feesController.totalFeesCollected);
+router.get('/feesbalance' , verifyToken , feesController.balance_due)
+
 module.exports = router;

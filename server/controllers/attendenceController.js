@@ -64,4 +64,18 @@ const getMyAttendence = async (req , res , next) =>{
   }
 }
 
-module.exports = {getattendence , addattendence , updateattendence , deleteattendence ,getMyAttendence};
+// total attendence record 
+
+const getOverallattendence = async (req, res , next) =>{
+  try{
+   const db = getDB();
+   query = "SELECT (COUNT(CASE WHEN attendence_status = 'present' THEN 1 END) *100.0 / COUNT(*)) as attendence_percentage FROM attendences"
+   const [overallattendence] = await db.query(query);
+   res.json(overallattendence)
+  }
+  catch(error){
+    next(error)
+  }
+}
+
+module.exports = {getattendence , addattendence , updateattendence , deleteattendence ,getMyAttendence , getOverallattendence};

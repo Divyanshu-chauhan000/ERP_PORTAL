@@ -31,7 +31,7 @@ const login = async (req, res , next) =>{
           expiresIn : '7d'
         }
       )
-      res.status(200).json({message : "Login Successfull" , token : token});
+      res.status(200).json({message : "Login Successfull" , token : token , username : user.username});
     }
     else{
       res.status(401).json({message : "Invalid Credentials"})

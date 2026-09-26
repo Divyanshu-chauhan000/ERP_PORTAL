@@ -16,6 +16,7 @@ import UpdateStudent from './components/UpdateStudent';
 
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
+import './App.css'
 
 export default function App() {
 

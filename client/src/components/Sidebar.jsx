@@ -2,9 +2,11 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import getRole from '../utils/getRole';
 import './../style/sidebar.css'
+import { useLocation } from 'react-router-dom';
 
 function Sidebar() {
   const role = getRole();
+  const location = useLocation();
 
   const navigate = useNavigate();
   
@@ -58,7 +60,7 @@ function Sidebar() {
       {
         menuItems.map((items) =>{
           return (
-            <div key={items.path} className='menu-items' onClick={() => navigate(items.path)}>
+            <div key={items.path} className={`menu-items ${location.pathname === items.path ? 'active' : ""}`} onClick={() => navigate(items.path)}>
                  <span className='menu-icon'>{items.icon}</span>
                  <span className='menu-label'>{items.label}</span>
             </div>

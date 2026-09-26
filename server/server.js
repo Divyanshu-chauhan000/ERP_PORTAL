@@ -9,7 +9,7 @@ dotenv.config();
 const app =express();
 app.use(cors());
 app.use(morgan('dev'));
-app.use(limiter);
+// app.use(limiter);
 
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));

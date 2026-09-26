@@ -49,4 +49,33 @@ const deletefees = async (req, res , next) =>{
   }
 }
 
-module.exports = { getFees , addfees , updatefees , deletefees };
+
+//get total collected fees record 
+
+const totalFeesCollected = async (req , res , next) =>{
+try{
+ const db =  getDB();
+ query = "SELECT SUM(total_fees - balance_due) as total_collected_fees FROM fees";
+ const [totalcollectedFees] = await db.query(query);
+ res.json(totalcollectedFees);
+}
+catch(error){
+  next(error);
+}
+}
+
+// get balance fees 
+
+const balance_due = async (req, res, next) =>{
+  try{
+    const db = getDB();
+    query = "SELECT SUM(balance_due) as balance_fees FROM fees";
+    const [balance] = await db.query(query);
+    res.json(balance);
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+module.exports = { getFees , addfees , updatefees , deletefees , totalFeesCollected , balance_due };

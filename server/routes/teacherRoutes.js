@@ -8,4 +8,6 @@ router.post('/' ,verifyToken, teacherController.addTeacher);
 router.put('/:id' ,verifyToken, teacherController.updateTeacher);
 router.delete('/:id' ,verifyToken, teacherController.deleteteacher);
 
+router.get('/total-teachers' , verifyToken , teacherController.getTotalTeachers);
+
 module.exports = router;

@@ -1,36 +1,17 @@
-
-
 .dashboard{
-  display: flex;
-  height: 100vh;
-}
-
-.sideBar{
-  width: 228px;
-  background-color: rgb(107, 104, 104);
-  padding: 16px;
-}
-.sideLinks{
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  /* padding-left: 20px; */
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.sideLinks a{
-  text-decoration: none;
-  color: rgb(15, 238, 238);
-}
-.sideLinks a.active{
-  background-color: rgb(195, 240, 234);
-  border-radius: 20px;
-  padding: 8px 6px;
-}
-
-.main{
-  flex : 1 ;
   padding: 20px;
-  background-color: gainsboro;
 }
+
+.dashboard h2{
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.stats-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit , minmax(300px , 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
