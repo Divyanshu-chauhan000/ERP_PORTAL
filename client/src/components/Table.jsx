@@ -6,7 +6,7 @@ function Table({ title, columns, data, actionButtons }) {
     <div className='table-container'>
       <div className='table-header'>
         <h3>{title}</h3>
-        <a href="#" className='view-link'>View all</a>
+        <a href="/students/with-class" className='view-link'>View all</a>
       </div>
 
       <table className='data-table'>

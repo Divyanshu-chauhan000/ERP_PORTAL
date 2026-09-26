@@ -1,6 +1,8 @@
 const {getDB} = require('../configs/db');
 const {validationResult} = require('express-validator');
 
+
+
 const getAllstudents = async (req, res , next) =>{
  try{
   const page = req.query.page || 1;
@@ -67,9 +69,12 @@ const deleteStudent = async (req, res , next) =>{
 
 const getStudentwithClass = async (req, res , next) =>{
   try{
+  const page = req.query.page || 1;
+  const limit = req.query.limit || 10;
+  const offset =  (page - 1 ) * limit;
     const db =  getDB();
-    query = "SELECT  students.student_name , classes.class_name , classes.class_section  FROM students JOIN classes ON students.class_id = classes.class_id"
-    const [studentWithClass] = await db.query(query);
+    query = "SELECT  students.student_id ,students.student_name , classes.class_name , classes.class_section , students.student_admission_date  FROM students JOIN classes ON students.class_id = classes.class_id LIMIT ? OFFSET ? "
+    const [studentWithClass] = await db.query(query , [Number(limit) , Number(offset)]);
     res.json(studentWithClass);
   }
   catch(error){

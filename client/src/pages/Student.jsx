@@ -5,6 +5,8 @@ import { useState , useEffect } from 'react';
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
 import getRole from '../utils/getRole';
+import { MdDeleteForever,MdEdit } from "react-icons/md";
+import { IoIosPersonAdd } from "react-icons/io";
 
 export default function Student() {
 
@@ -37,10 +39,11 @@ export default function Student() {
     <div>
       <div className='student-bar'>
         <h2>Total Number of students </h2>
+       
         <div>
           {
             role === 'admin' && (
-              <button onClick={() => navigate('/addstudent')} className='add-btn'>Add Student</button>
+              <button onClick={() => navigate('/addstudent')} className='add-btn'><IoIosPersonAdd size={18} /></button>
             )
           }
         </div>
@@ -66,13 +69,13 @@ export default function Student() {
                <tr key={student.student_id}>
                 <td>{student.student_id}</td>
                 <td>{student.student_name}</td>
-                <td>{student.student_dob}</td>
+                <td>{new Date(student.student_dob).toLocaleDateString('en-US' , {day : '2-digit', month: "short", year:"numeric"} )}</td>
                 <td>{student.student_gender}</td>
                 <td>{student.student_address}</td>
                 <td>{student.student_contact}</td>
-                <td>{student.student_admission_date}</td>
+                <td>{new Date(student.student_admission_date).toLocaleDateString('en-US', {day : '2-digit' , month:'short', year: 'numeric'} )}</td>
                 <td>{student.class_id}</td>
-                <td><button style={{width: '50%'}} onClick={() => handleDelete(student.student_id)}>Delete</button>  <button onClick={() => navigate('/editstudent', {state : student})}>Edit Student</button></td>
+                <td><button style={{width: '50%'}} onClick={() => handleDelete(student.student_id)}><MdDeleteForever size={18}/></button>  <button onClick={() => navigate('/editstudent', {state : student})}><MdEdit size={18} /></button></td>
                </tr>
              ))
             }

@@ -69,13 +69,22 @@ catch(error){
 const balance_due = async (req, res, next) =>{
   try{
     const db = getDB();
-    query = "SELECT SUM(balance_due) as balance_fees FROM fees";
-    const [balance] = await db.query(query);
+    query = "SELECT SUM(balance_due) as balance_fees FROM fees ";
+    const [balance] = await db.query(query );
     res.json(balance);
   }
   catch(error){
     next(error);
   }
 }
+
+//student wise fee details
+
+// const feeDeafaulterStudents = async (req, res , next) =>{
+//   try{
+//     const db =  getDB();
+//     query = "SELECT student.student_id , student.student_name , "
+//   }
+// }
 
 module.exports = { getFees , addfees , updatefees , deletefees , totalFeesCollected , balance_due };
