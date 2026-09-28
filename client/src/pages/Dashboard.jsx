@@ -5,6 +5,7 @@ import StatsCard from "../components/StatsCard";
 import api from "../api/axios";
 import Table from "../components/Table";
 
+
 export default function Dashboard() {
   const [stats, setStats] = useState({
     totalStudents: 0,

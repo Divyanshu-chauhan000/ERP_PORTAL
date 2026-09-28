@@ -12,6 +12,7 @@ export default function Student() {
 
 
   const [students , setstudents] = useState([]);
+  const[searchId , setSearchId] = useState('');
   const navigate = useNavigate();
   const role = getRole();
 
@@ -38,7 +39,7 @@ export default function Student() {
   return (
     <div>
       <div className='student-bar'>
-        <h2>Total Number of students </h2>
+        <h2>Students </h2>
        
         <div>
           {
@@ -47,6 +48,9 @@ export default function Student() {
             )
           }
         </div>
+      </div>
+      <div className='search-std'>
+        <input type="text"  placeholder='Search Id' value={searchId} className='searchid-inpt'  onChange={(e) => setSearchId(e.target.value)}/>
       </div>
       <ul className='student-table'>
            <table border="1" cellPadding='10' style={{width: '100%', borderCollapse : 'collapse' , textAlign : 'left'}}>
@@ -65,7 +69,9 @@ export default function Student() {
             </thead>
             <tbody>
              {
-             students.map((student) =>(
+              students.filter((student) =>{
+               return student.student_id.toString().includes(searchId);
+              }).map((student) =>(
                <tr key={student.student_id}>
                 <td>{student.student_id}</td>
                 <td>{student.student_name}</td>
@@ -77,7 +83,7 @@ export default function Student() {
                 <td>{student.class_id}</td>
                 <td><button style={{width: '50%'}} onClick={() => handleDelete(student.student_id)}><MdDeleteForever size={18}/></button>  <button onClick={() => navigate('/editstudent', {state : student})}><MdEdit size={18} /></button></td>
                </tr>
-             ))
+             )) 
             }
             </tbody>
            </table>
