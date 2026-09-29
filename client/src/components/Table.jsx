@@ -1,12 +1,18 @@
 import React from "react";
 import "./../style/table.css";
 
-function Table({ title, columns, data, actionButtons }) {
+function Table({
+  title,
+  columns,
+  data,
+  actionButtons,
+  viewLink = "/students/with-class",
+}) {
   return (
     <div className="table-container">
       <div className="table-header">
         <h3>{title}</h3>
-        <a href="/students/with-class" className="view-link">
+        <a href={viewLink} className="view-link">
           View all
         </a>
       </div>
@@ -32,9 +38,9 @@ function Table({ title, columns, data, actionButtons }) {
                 ))}
                 {actionButtons && (
                   <td className="action-cell">
-                    {actionButtons.map((btn) => (
+                    {actionButtons.map((btn, btnIdx) => (
                       <button
-                        key={btn.label}
+                        key={`${idx} - ${btnIdx}`}
                         onClick={() => btn.onClick(row)}
                         className={`action-btn ${btn.style}`}
                       >

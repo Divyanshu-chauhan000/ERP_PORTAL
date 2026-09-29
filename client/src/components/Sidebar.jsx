@@ -41,7 +41,7 @@ function Sidebar() {
      {
       icon : <FaCalendarCheck />,
       label : "Attendence",
-      path : '/attendence',
+      path : '/attendences',
     },
      {
       icon : <MdOutlineAttachMoney />,

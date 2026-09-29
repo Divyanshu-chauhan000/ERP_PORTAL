@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended : false}));
 app.use('/students' , require('./routes/studentRoutes'));
 app.use('/teachers' , require('./routes/teacherRoutes'));
 app.use('/subjects' , require('./routes/subjectRoutes'));
-app.use('/class' , require('./routes/classRoutes'));
+app.use('/classes' , require('./routes/classRoutes'));
 app.use('/fees' , require('./routes/feesRoutes'));
 app.use('/attendence' , require('./routes/attendenceRoutes'));
 app.use('/exam' , require('./routes/examRoutes'));
