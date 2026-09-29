@@ -27,6 +27,7 @@ import UpdateTeacher from "./components/UpdateTeacher";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 import "./App.css";
+import StudentDetail from "./components/StudentDetail";
 
 export default function App() {
   return (
@@ -210,6 +211,7 @@ export default function App() {
           }
         />
       </Route>
+      <Route path="/student/:id" element={<ProtectedRoute><StudentDetail/></ProtectedRoute>}/>
     </Routes>
   );
 }
