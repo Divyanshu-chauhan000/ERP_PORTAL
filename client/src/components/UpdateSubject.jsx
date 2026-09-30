@@ -43,7 +43,7 @@ export default function UpdateSubject() {
           onChange={(e) => setSubjectName(e.target.value)}
           required
         />
-        <button type="submit">Update</button>
+        <button type="submit">Update Subject</button>
       </form>
     </div>
   );
