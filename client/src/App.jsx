@@ -34,6 +34,8 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route element={<Layout />}>
+
+      {/* Admin routes here */}
         <Route
           path="/dashboard"
           element={
@@ -210,8 +212,17 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-      </Route>
       <Route path="/student/:id" element={<ProtectedRoute><StudentDetail/></ProtectedRoute>}/>
+
+
+
+      {/* Student routes here */}
+      <Route path='/student-dashboard' element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
+       <Route path='/student-profile' element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
+       <Route path='/student-exams' element={<ProtectedRoute><StudentExams /></ProtectedRoute>} />
+       <Route path='/student-fees' element={<ProtectedRoute><StudentFees /></ProtectedRoute>} />
+      <Route path='/student-attendance' element={<ProtectedRoute><StudentAttendance /></ProtectedRoute>} />
+      </Route>
     </Routes>
   );
 }

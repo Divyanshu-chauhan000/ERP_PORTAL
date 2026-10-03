@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import './../style/login.css'
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -18,7 +19,22 @@ export default function Login() {
       });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username" ,  response.data.username)
-      navigate("/dashboard");
+        
+
+      const roleDecode = jwtDecode(response.data.toke);
+      const role = roleDecode.role;
+
+      if(role === 'student'){
+        navigate('/student-dashboard');
+      }
+      else if(role === 'teacher'){
+        navigate('/teacher-dashboard');
+      }
+      else if(role === 'admin'){
+        navigate('/dashboard');
+      }
+
+
     } catch (error) {
       console.log(error);
     }
