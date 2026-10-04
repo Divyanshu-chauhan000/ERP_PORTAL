@@ -64,6 +64,18 @@ const deleteExams = async (req, res, next) => {
   }
 };
 
+// get my exam info 
+
+const myExams =  async (req , res , next) =>{
+   try{
+    const db = getDB();
+    query = "SELECT FROM exams WHERE exam_id = ?";
+    
+   }catch(error){
+    next(error)
+   }
+}
+
 module.exports = {
   getExams,
   addExams,

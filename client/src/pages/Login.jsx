@@ -21,7 +21,7 @@ export default function Login() {
       localStorage.setItem("username" ,  response.data.username)
         
 
-      const roleDecode = jwtDecode(response.data.toke);
+      const roleDecode = jwtDecode(response.data.token);
       const role = roleDecode.role;
 
       if(role === 'student'){

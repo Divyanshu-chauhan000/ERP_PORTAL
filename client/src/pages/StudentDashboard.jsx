@@ -57,9 +57,7 @@ function StudentDashboard() {
   },[])
 
    
-  const quickLinks = [
 
-  ]
 
 
   return (

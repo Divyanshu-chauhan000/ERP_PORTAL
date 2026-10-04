@@ -28,6 +28,11 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 import "./App.css";
 import StudentDetail from "./components/StudentDetail";
+import StudentDashboard from './pages/StudentDashboard'
+import StudentProfile from "./pages/StudentProfile";
+import StudentExams from "./pages/StudentExams";
+import StudentFees from "./pages/StudentFees";
+import StudentAttendence from "./pages/StudentAttendence";
 
 export default function App() {
   return (
@@ -221,7 +226,7 @@ export default function App() {
        <Route path='/student-profile' element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
        <Route path='/student-exams' element={<ProtectedRoute><StudentExams /></ProtectedRoute>} />
        <Route path='/student-fees' element={<ProtectedRoute><StudentFees /></ProtectedRoute>} />
-      <Route path='/student-attendance' element={<ProtectedRoute><StudentAttendance /></ProtectedRoute>} />
+      <Route path='/student-attendance' element={<ProtectedRoute><StudentAttendence /></ProtectedRoute>} />
       </Route>
     </Routes>
   );
