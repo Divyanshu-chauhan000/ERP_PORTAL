@@ -1,0 +1,126 @@
+.profile-container {
+  padding: 24px;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+.profile-page-title h2 {
+  margin: 0 0 20px 0;
+  color: #1f2937;
+  font-size: 24px;
+}
+
+.profile-header-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.profile-photo img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #eff6ff;
+}
+
+.profile-header-info h2 {
+  margin: 0 0 8px 0;
+  font-size: 26px;
+  color: #111827;
+}
+
+.profile-header-info .subtitle {
+  margin: 0 0 12px 0;
+  color: #4b5563;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.status-badge {
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Cards Grid */
+.profile-content-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.card-icon {
+  font-size: 22px;
+}
+
+.blue-icon { color: #3b82f6; }
+.green-icon { color: #22c55e; }
+.purple-icon { color: #8b5cf6; }
+.orange-icon { color: #f59e0b; }
+
+.card-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-group label {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.info-group p {
+  margin: 0;
+  font-size: 15px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.warning-bg {
+  background-color: #fffbeb;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid #f59e0b;
+}

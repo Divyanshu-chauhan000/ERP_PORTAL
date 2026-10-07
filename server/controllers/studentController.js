@@ -112,10 +112,32 @@ const getTotalStudents = async (req ,res , next) =>{
   }
 }
 
-//get students complete info 
+//get students Profile info By ID
+
+const getStudentProfile = async (req , res , next) =>{
+  try{
+    const db = getDB();
+    const query = `
+    SELECT students.* , classes.class_name , classes.class_section 
+    FROM students 
+    JOIN classes ON students.student_id = classes.class_id
+    WHERE students.student_id = ?
+    `
+    const [studentProfile] = await db.query(query , [req.params.id]);
+
+    if(studentProfile.length == 0){
+      return res.status(404).json({message : "Student not found "});
+    }
+
+    res.json(studentProfile);
+
+  }catch(error){
+    next(error);
+  }
+}
 
 
 
 module.exports = {
-  getAllstudents , addAllstudents , updateStudent , deleteStudent , getStudentwithClass , getStudentclasswise, getTotalStudents
+  getAllstudents , addAllstudents , updateStudent , deleteStudent , getStudentwithClass , getStudentclasswise, getTotalStudents, getStudentProfile
 }

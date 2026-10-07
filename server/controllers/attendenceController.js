@@ -3,8 +3,9 @@ const {getDB} = require('./../configs/db');
 const getattendence = async (req, res , next) =>{
   try{
     const db = getDB();
-    query = "SELECT * FROM attendences";
-    const [attendences] = await db.query(query);
+    const {student_id} = req.query;
+    const query = student_id ? "SELECT * FROM attendences WHERE student_id = ?" : "SELECT * FROM attendences";
+    const [attendences] = await db.query(query , student_id ? [req.params.id] : []);
     res.json(attendences);
   }
   catch(error){

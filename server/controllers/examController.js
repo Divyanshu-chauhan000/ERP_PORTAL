@@ -69,8 +69,9 @@ const deleteExams = async (req, res, next) => {
 const myExams =  async (req , res , next) =>{
    try{
     const db = getDB();
-    query = "SELECT FROM exams WHERE exam_id = ?";
-    
+    query = "SELECT * FROM exam WHERE student_id = ?";
+    const [myexams] = await db.query(query , [req.params.id]);
+    res.json(myexams);
    }catch(error){
     next(error)
    }
@@ -81,4 +82,5 @@ module.exports = {
   addExams,
   updateExams,
   deleteExams,
+  myExams
 };

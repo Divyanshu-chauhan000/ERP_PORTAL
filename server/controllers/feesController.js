@@ -69,8 +69,9 @@ catch(error){
 const balance_due = async (req, res, next) =>{
   try{
     const db = getDB();
-    query = "SELECT SUM(balance_due) as balance_fees FROM fees ";
-    const [balance] = await db.query(query );
+    const {student_id} = req.query;
+    const query =student_id ?  "SELECT SUM(balance_due) as balance_fees FROM fees WHERE student_id = ? " : "SELECT SUM(balance_due) as balance_fees FROM fees";
+    const [balance] = await db.query(query , student_id ? [req.params.id] : []);
     res.json(balance);
   }
   catch(error){

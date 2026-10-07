@@ -15,6 +15,7 @@ router.get('/count-by-class' , verifyToken , studentController.getStudentclasswi
 
 router.get('/with-class', studentController.getStudentwithClass);
 router.get('/total-students' , studentController.getTotalStudents);
+router.get('/profile/:id' , verifyToken , studentController.getStudentProfile);
 
 module.exports = router;
 

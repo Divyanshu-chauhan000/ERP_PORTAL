@@ -1,0 +1,281 @@
+.student-dashboard{
+  padding: 32px;
+  background-color: #f9fafb;
+  min-height: 100vh;
+}
+
+.std-dash-title{
+  font-size: 26px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 28px 0;
+}
+
+.welcome-banner{
+  display: flex;
+align-items: center;
+background-color: #fff;
+padding: 24px;
+border-radius: 16px;;
+box-shadow:  0 4px 20px rgba(0, 0, 0, 0.05);
+margin-bottom: 30px;
+gap: 24px;
+}
+
+.welcome-banner img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  border: 3px solid #eff6ff; 
+}
+
+.welcome-banner h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111827; 
+  margin: 0 0 8px 0; 
+}
+.welcome-banner p {
+  font-size: 16px;
+  color: #6b7280;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.welcome-banner p span {
+  margin-left: 5px; 
+}
+
+
+.quick-links{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.quickLinksstyle{
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.quickLinksstyle:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; 
+  gap: 24px;
+}
+
+.content-left, .content-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; 
+}
+
+.upcoming-exams, .fee-overView, .quick-actions-container {
+  background-color: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #f3f4f6;
+  padding-bottom: 16px;
+}
+
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-with-icon h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2937;
+}
+
+.header-icon {
+  font-size: 20px;
+}
+
+.view-all {
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.exam-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.exam-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.exam-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8fafc;
+  padding: 10px 16px;
+  border-radius: 12px;
+  min-width: 60px;
+}
+.exam-date .day {
+  font-size: 24px;
+  font-weight: 700;
+}
+.exam-date .month {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.exam-info {
+  flex: 1;
+  margin-left: 20px;
+}
+.subject-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.subject-name h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #111827;
+}
+.exam-info p {
+  margin: 4px 0 0 24px;
+  font-size: 13px;
+  color: #6b7280;
+}
+.exam-time {
+  background: #eff6ff;
+  color: #3b82f6;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.orange-icon { color: #f59e0b; }
+.fee-subtitle {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.progress-bar-container {
+  background: #f3f4f6;
+  height: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress-bar-fill {
+  background: #22c55e;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  transition: width 0.5s ease;
+}
+.fee-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.fee-stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.fee-stat p {
+  margin: 0 0 4px 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+.fee-stat h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #1f2937;
+}
+.text-right {
+  text-align: right;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.fee-warning {
+  background: #fffbeb;
+  color: #d97706;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.fee-warning p {
+  margin: 0;
+}
+
+/*  Color utitlies classes here  */
+.blue-text { color: #3b82f6; }
+.green-text { color: #22c55e; }
+.purple-text { color: #8b5cf6; }
+.blue-icon { color: #3b82f6; }
+.green-icon { color: #22c55e; }
+.purple-icon { color: #8b5cf6; }
+.green-dot { background: #22c55e; }
+.orange-dot { background: #f59e0b; }
