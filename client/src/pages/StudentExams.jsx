@@ -1,157 +1,310 @@
-import React, { useState } from 'react'
-import { FaCalendarCheck, FaTrophy, FaFileAlt } from "react-icons/fa";
-import Table from "./../components/Table";
-import './../style/studentExam.css'
+import React, { useState } from "react";
+import { FaCalendarCheck, FaTrophy, FaClock, FaBookOpen } from "react-icons/fa";
+import "../style/studentExam.css";
+
+const upcomingExams = [
+  {
+    id: 1,
+    subject: "Mathematics",
+    date: "14-10-2026",
+    time: "10:00 AM - 01:00 PM",
+    syllabus: "Chapters 1-5 · Algebra",
+    type: "Mid Term",
+  },
+  {
+    id: 2,
+    subject: "Science",
+    date: "16-10-2026",
+    time: "10:00 AM - 01:00 PM",
+    syllabus: "Physics & Chemistry Basics",
+    type: "Mid Term",
+  },
+  {
+    id: 3,
+    subject: "English",
+    date: "20-10-2026",
+    time: "10:00 AM - 12:30 PM",
+    syllabus: "Grammar & Literature",
+    type: "PT 1",
+  },
+];
+
+const pastResults = [
+  {
+    id: 1,
+    subject: "English",
+    maxMarks: 100,
+    obtained: 85,
+    grade: "A",
+    status: "Pass",
+    class: "Class 8",
+    type: "Mid Term",
+  },
+  {
+    id: 2,
+    subject: "Hindi",
+    maxMarks: 100,
+    obtained: 78,
+    grade: "B+",
+    status: "Pass",
+    class: "Class 8",
+    type: "Mid Term",
+  },
+  {
+    id: 3,
+    subject: "Computer",
+    maxMarks: 50,
+    obtained: 48,
+    grade: "A+",
+    status: "Pass",
+    class: "Class 7",
+    type: "Final Exam",
+  },
+  {
+    id: 4,
+    subject: "Mathematics",
+    maxMarks: 100,
+    obtained: 32,
+    grade: "D",
+    status: "Fail",
+    class: "Class 8",
+    type: "PT 1",
+  },
+];
+
+const examTypes = ["All Exams", "PT 1", "PT 2", "Mid Term", "Final Exam"];
+const resultTypes = ["All Exams", "PT 1", "Mid Term", "Final Exam"];
+const resultClasses = ["All Classes", "Class 7", "Class 8", "Class 9"];
+
+function getDateParts(dateText) {
+  const [day, month, year] = dateText.split("-");
+  const date = new Date(`${year}-${month}-${day}T00:00:00`);
+  return {
+    day,
+    month: date.toLocaleDateString("en", { month: "short" }).toUpperCase(),
+    fullDate: date.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }),
+  };
+}
+
 function StudentExams() {
+  const [activeTab, setActiveTab] = useState("upcoming");
+  const [examTypeFilter, setExamTypeFilter] = useState("All Exams");
+  const [resultClassFilter, setResultClassFilter] = useState("All Classes");
+  const [resultTypeFilter, setResultTypeFilter] = useState("All Exams");
 
-  const [activeTab , setActiveTab] = useState('upcoming');
-  const [examTypeFilter , setExamTypeFilter] = useState('All');
-
-
-  const [resultClassFilter , setResultClassFilter] = useState('All');
-  const [resultTypeFilter , setResultTypeFilter] = useState('All');
-
-  const upcomingExams = [
-    { id: 1, subject: "Mathematics", date: "28-05-2025", time: "10:00 AM - 01:00 PM", syllabus: "Ch 1 to 5, Algebra", type: "Mid Term" },
-    { id: 2, subject: "Science", date: "30-05-2025", time: "10:00 AM - 01:00 PM", syllabus: "Physics & Chemistry Basics", type: "Mid Term" },
-    { id: 3, subject: "English", date: "05-06-2025", time: "10:00 AM - 12:30 PM", syllabus: "Grammar & Literature", type: "PT 1" }
-  ];  
-
-  const pastResults = [
-    { id: 1, subject: "English", maxMarks: 100, obtained: 85, grade: "A", status: "Pass", class: "Class 8", type: "Mid Term" },
-    { id: 2, subject: "Hindi", maxMarks: 100, obtained: 78, grade: "B+", status: "Pass", class: "Class 8", type: "Mid Term" },
-    { id: 3, subject: "Computer", maxMarks: 50, obtained: 48, grade: "A+", status: "Pass", class: "Class 7", type: "Final Exam" },
-    { id: 4, subject: "Mathematics", maxMarks: 100, obtained: 32, grade: "D", status: "Fail", class: "Class 8", type: "PT 1" }
-  ];
-
-    const upcomingColumns = [
-    { key: 'subject', label: 'Subject', render: (row) => <strong>{row.subject}</strong> },
-    { 
-      key: 'dateTime', 
-      label: 'Date & Time', 
-      render: (row) => (
-        <div className="date-time">
-          <span className="exam-date">{row.date}</span>
-          <span className="exam-time">{row.time}</span>
-        </div>
-      )
-    },
-    { key: 'type', label: 'Exam Type', render: (row) => <span className="exam-type-badge">{row.type}</span> },
-    { key: 'syllabus', label: 'Syllabus', render: (row) => <span className="syllabus-text">{row.syllabus}</span> }
-  ];
-
-  const pastColumns = [
-    { key: 'subject', label: 'Subject', render: (row) => <strong>{row.subject}</strong> },
-    { key: 'classType', label: 'Class & Type', render: (row) => <span className="exam-type-badge">{row.class} - {row.type}</span> },
-    { key: 'maxMarks', label: 'Max Marks' },
-    { key: 'obtained', label: 'Obtained Marks', render: (row) => <strong>{row.obtained}</strong> },
-    { 
-      key: 'grade', 
-      label: 'Grade', 
-      render: (row) => <span className={`grade-badge grade-${row.grade.charAt(0).toLowerCase()}`}>{row.grade}</span> 
-    },
-    { 
-      key: 'status', 
-      label: 'Status', 
-      render: (row) => <span className={`status-badge ${row.status === 'Pass' ? 'pass' : 'fail'}`}>{row.status}</span> 
-    }
-  ];
-
+  const visibleExams = upcomingExams.filter(
+    (exam) => examTypeFilter === "All Exams" || exam.type === examTypeFilter,
+  );
+  const visibleResults = pastResults.filter(
+    (result) =>
+      (resultClassFilter === "All Classes" ||
+        result.class === resultClassFilter) &&
+      (resultTypeFilter === "All Exams" || result.type === resultTypeFilter),
+  );
+  const averageScore = Math.round(
+    pastResults.reduce(
+      (sum, result) => sum + (result.obtained / result.maxMarks) * 100,
+      0,
+    ) / pastResults.length,
+  );
 
   return (
-    <div className='exams-container'>
+    <main className="exams-container">
+      <header className="student-exams-header">
+        <div>
+          <p className="student-exams-eyebrow">Academic session 2026-27</p>
+          <h1>Exams & Results</h1>
+          <p>Your exam schedule and published scores.</p>
+        </div>
+        <div className="exam-overview" aria-label="Exam overview">
+          <div>
+            <span>Upcoming</span>
+            <strong>{upcomingExams.length}</strong>
+          </div>
+          <div>
+            <span>Results</span>
+            <strong>{pastResults.length}</strong>
+          </div>
+          <div>
+            <span>Average</span>
+            <strong>{averageScore}%</strong>
+          </div>
+        </div>
+      </header>
 
-      <div className='page-header'>
-        <h2>My Exams & Results </h2>
-        <p>View your upcoming exam schedule and past performance. </p>
-      </div>
-
-      <div className='tabs-container'>
-         <button className={`tab-btn ${activeTab === 'upcoming' ? 'active' : " "}`} onClick={() => setActiveTab('upcoming')}>
-          <FaCalendarCheck />
-         </button>
-
-                 <button className={`tab-btn ${activeTab === 'results' ? 'active' : ''}`} onClick={() => setActiveTab('results')}>
-          <FaTrophy /> Past Results
+      <div className="tabs-container" role="tablist" aria-label="Exam views">
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "upcoming"}
+          className={`tab-btn ${activeTab === "upcoming" ? "active" : ""}`}
+          onClick={() => setActiveTab("upcoming")}
+        >
+          <FaCalendarCheck aria-hidden="true" /> Upcoming Exams{" "}
+          <span>{upcomingExams.length}</span>
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={activeTab === "results"}
+          className={`tab-btn ${activeTab === "results" ? "active" : ""}`}
+          onClick={() => setActiveTab("results")}
+        >
+          <FaTrophy aria-hidden="true" /> Past Results{" "}
+          <span>{pastResults.length}</span>
         </button>
       </div>
 
-      {
-        activeTab === 'upcoming' && (
-          <div className='exam-card'> 
-               <div className='card-header' style={{ justifyContent : "space-between" , flexWrap : "wrap"}}>
-                <div style={{display : 'flex' , alignItems : 'center' , gap:'12px'}}> 
-                                <FaFileAlt className="card-icon blue-icon" />
-              <h3>Upcoming Exam Schedule</h3>
-                  </div>
-
-                  <select className='exam-filter-select' value={examTypeFilter} onChange={(e) => setExamTypeFilter(e.target.value)}>
-                     <option value="All">All Exams</option>
-              <option value="PT 1">PT 1</option>
-              <option value="PT 2">PT 2</option>
-              <option value="Mid Term">Mid Term</option>
-              <option value="Final Exam">Final Exam</option>
-                    </select> 
-        
-               </div>
-          <div className="table-responsive">
-            <Table 
-              columns={upcomingColumns} 
-              data={upcomingExams.filter(exam => examTypeFilter === 'All' || exam.type === examTypeFilter)}
-              viewLink="#"
-            />
-          </div>
-
-
-          </div>
-        )
-      }
-
-      {activeTab === 'results' && (
-        <div className="exam-card">
-          <div className="card-header" style={{ justifyContent: 'space-between', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <FaTrophy className="card-icon orange-icon" />
-              <h3>Exam Results</h3>
+      {activeTab === "upcoming" ? (
+        <section className="student-exam-panel" role="tabpanel">
+          <div className="student-exam-panel-header">
+            <div className="student-exam-panel-title">
+              <span className="student-exam-panel-icon schedule">
+                <FaCalendarCheck aria-hidden="true" />
+              </span>
+              <div>
+                <h2>Exam schedule</h2>
+                <p>{visibleExams.length} exams listed</p>
+              </div>
             </div>
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <select 
-                className="exam-filter-select"
-                value={resultClassFilter} 
-                onChange={(e) => setResultClassFilter(e.target.value)}
+            <label className="exam-filter-label">
+              <span>Exam type</span>
+              <select
+                value={examTypeFilter}
+                onChange={(event) => setExamTypeFilter(event.target.value)}
               >
-                <option value="All">All Classes</option>
-                <option value="Class 7">Class 7</option>
-                <option value="Class 8">Class 8</option>
-                <option value="Class 9">Class 9</option>
+                {examTypes.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
               </select>
-              <select 
-                className="exam-filter-select"
-                value={resultTypeFilter} 
-                onChange={(e) => setResultTypeFilter(e.target.value)}
-              >
-                <option value="All">All Exams</option>
-                <option value="PT 1">PT 1</option>
-                <option value="Mid Term">Mid Term</option>
-                <option value="Final Exam">Final Exam</option>
-              </select>
+            </label>
+          </div>
+
+          {visibleExams.length ? (
+            <div className="student-exam-list">
+              {visibleExams.map((exam) => {
+                const date = getDateParts(exam.date);
+                return (
+                  <article className="student-exam-row" key={exam.id}>
+                    <div className="exam-date-block">
+                      <strong>{date.day}</strong>
+                      <span>{date.month}</span>
+                    </div>
+                    <div className="student-exam-main">
+                      <div className="student-exam-title-line">
+                        <h3>{exam.subject}</h3>
+                        <span className="student-exam-type">{exam.type}</span>
+                      </div>
+                      <p className="exam-syllabus">
+                        <FaBookOpen aria-hidden="true" /> {exam.syllabus}
+                      </p>
+                    </div>
+                    <div className="student-exam-time">
+                      <FaClock aria-hidden="true" />
+                      <span>{exam.time}</span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="exam-empty">No exams match this filter.</p>
+          )}
+        </section>
+      ) : (
+        <section className="student-exam-panel" role="tabpanel">
+          <div className="student-exam-panel-header">
+            <div className="student-exam-panel-title">
+              <span className="student-exam-panel-icon results">
+                <FaTrophy aria-hidden="true" />
+              </span>
+              <div>
+                <h2>Published results</h2>
+                <p>{visibleResults.length} results shown</p>
+              </div>
+            </div>
+            <div className="result-filters">
+              <label className="exam-filter-label">
+                <span>Class</span>
+                <select
+                  value={resultClassFilter}
+                  onChange={(event) => setResultClassFilter(event.target.value)}
+                >
+                  {resultClasses.map((schoolClass) => (
+                    <option key={schoolClass} value={schoolClass}>
+                      {schoolClass}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="exam-filter-label">
+                <span>Exam type</span>
+                <select
+                  value={resultTypeFilter}
+                  onChange={(event) => setResultTypeFilter(event.target.value)}
+                >
+                  {resultTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
           </div>
-          <div className="table-responsive">
-            <Table 
-              columns={pastColumns} 
-              data={pastResults.filter(res => 
-                (resultClassFilter === 'All' || res.class === resultClassFilter) &&
-                (resultTypeFilter === 'All' || res.type === resultTypeFilter)
-              )}
-              viewLink="#"
-            />
-          </div>
-        </div>
+
+          {visibleResults.length ? (
+            <div className="student-results-list">
+              {visibleResults.map((result) => {
+                const score = Math.round(
+                  (result.obtained / result.maxMarks) * 100,
+                );
+                return (
+                  <article className="student-result-row" key={result.id}>
+                    <div className="student-result-heading">
+                      <div>
+                        <h3>{result.subject}</h3>
+                        <p>
+                          {result.class} <span>·</span> {result.type}
+                        </p>
+                      </div>
+                      <span
+                        className={`student-grade grade-${result.grade.charAt(0).toLowerCase()}`}
+                      >
+                        {result.grade}
+                      </span>
+                    </div>
+                    <div className="student-result-score">
+                      <div className="score-bar">
+                        <span style={{ width: `${score}%` }} />
+                      </div>
+                      <span>
+                        {result.obtained}
+                        <small> / {result.maxMarks}</small>
+                      </span>
+                      <span
+                        className={`student-result-status ${result.status.toLowerCase()}`}
+                      >
+                        {result.status}
+                      </span>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="exam-empty">No results match these filters.</p>
+          )}
+        </section>
       )}
-       
-    </div>
+    </main>
   );
 }
 
-export default StudentExams
+export default StudentExams;

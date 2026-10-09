@@ -12,6 +12,39 @@
   overflow-y: auto;
 }
 
+.side-content.sidebar-collapsed .nav-content {
+  margin-left: 0;
+}
+
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .nav-content { margin-left: 258px; }
+}
+
+@media (max-width: 560px) {
+  .nav-content { margin-left: 0; }
+
+  .nav-content > div:last-child {
+    padding: 12px;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    display: none;
+    border: 0;
+    background: rgba(15, 23, 42, 0.42);
+  }
+
+  .side-content.sidebar-open .sidebar-backdrop {
+    display: block;
+  }
+}
+
 .nav-content > div:last-child{
   flex : 1;
   padding : 20px;

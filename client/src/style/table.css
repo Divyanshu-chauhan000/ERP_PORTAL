@@ -1,4 +1,8 @@
 .table-container{
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   background: white;
   border-radius: 8px;
   padding: 24px;
@@ -36,6 +40,7 @@
 
 .data-table {
   width: 100%;
+  min-width: 720px;
   border-collapse: collapse;
 }
 
@@ -72,8 +77,18 @@
 }
 
 .action-cell {
-  display: flex;
-  gap: 8px;
+  white-space: nowrap;
+}
+
+.action-cell .action-btn + .action-btn { margin-left: 6px; }
+
+@media (max-width: 560px) {
+  .table-container { padding: 14px; margin-bottom: 16px; }
+  .table-header { align-items: center; gap: 10px; margin-bottom: 12px; padding-bottom: 12px; }
+  .table-header h3 { font-size: 14px; }
+  .data-table th { padding: 9px 8px; font-size: 10px; }
+  .data-table td { padding: 10px 8px; font-size: 12px; }
+  .action-btn { padding: 6px 8px; }
 }
 
 .action-btn {

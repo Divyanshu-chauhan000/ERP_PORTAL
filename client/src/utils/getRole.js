@@ -1,15 +1,16 @@
-import React from 'react'
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 function getRole() {
-  const token = localStorage.getItem('token');
-  if(!token){
-    return null
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return null;
   }
-  else{
+  try {
     const decoded = jwtDecode(token);
-    return decoded.role
+    return decoded.role || null;
+  } catch {
+    return null;
   }
 }
 
-export default getRole
+export default getRole;

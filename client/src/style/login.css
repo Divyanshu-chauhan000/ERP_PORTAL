@@ -14,3 +14,9 @@
 .login-input:focus{
   border-color: #1b4cd1;
 }
+
+.login-error {
+  margin: 0 0 4px;
+  color: #b91c1c;
+  font-size: 13px;
+}

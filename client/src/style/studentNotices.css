@@ -1,0 +1,59 @@
+.student-notices-page { min-height: 100%; padding: 24px; color: #1f2937; background: #f8fafc; }
+.notices-page-header { display: flex; align-items: center; gap: 16px; max-width: 1000px; margin: 0 auto 24px; }
+.notices-heading-icon { display: grid; width: 46px; height: 46px; flex: 0 0 46px; place-items: center; border: 1px solid #fed7aa; border-radius: 8px; background: #fff7ed; color: #c2410c; font-size: 20px; }
+.notices-eyebrow { margin: 0 0 4px; color: #64748b; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.notices-page-header h1 { margin: 0; font-size: 26px; line-height: 1.25; }
+.notices-page-header p:last-child { margin: 5px 0 0; color: #64748b; font-size: 14px; }
+.notices-panel { max-width: 1000px; margin: 0 auto; padding: 22px; border: 1px solid #e2e8f0; border-radius: 8px; background: #fff; }
+.notices-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding-bottom: 18px; border-bottom: 1px solid #e9eef4; }
+.notices-toolbar h2 { margin: 0; font-size: 17px; }
+.notices-toolbar p { margin: 5px 0 0; color: #64748b; font-size: 12px; }
+.notice-search { display: flex; align-items: center; gap: 8px; width: min(280px, 45%); padding: 9px 11px; border: 1px solid #dbe2ea; border-radius: 6px; color: #64748b; }
+.notice-search:focus-within { border-color: #315c82; box-shadow: 0 0 0 2px rgba(49, 92, 130, 0.12); }
+.notice-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #1f2937; font: inherit; font-size: 13px; }
+.notice-filters { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 0; }
+.notice-filters button { padding: 7px 12px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff; color: #475569; font: inherit; font-size: 12px; cursor: pointer; }
+.notice-filters button:hover { border-color: #94a3b8; }
+.notice-filters button.selected { border-color: #315c82; background: #315c82; color: #fff; }
+.student-notice-list { border-top: 1px solid #e9eef4; }
+.student-notice { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 16px; padding: 18px 4px; border-bottom: 1px solid #e9eef4; }
+.student-notice-date { display: flex; flex-direction: column; align-items: center; justify-content: center; align-self: start; min-height: 54px; border: 1px solid #e2e8f0; border-radius: 6px; background: #f8fafc; color: #334155; font-size: 13px; font-weight: 700; }
+.student-notice-date small { margin-top: 3px; color: #64748b; font-size: 10px; font-weight: 500; }
+.student-notice-content { min-width: 0; }
+.student-notice-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.student-notice-title-row h3 { margin: 0; color: #1f2937; font-size: 15px; line-height: 1.4; }
+.student-notice-category, .pinned-label { padding: 4px 8px; border-radius: 999px; background: #f1f5f9; color: #475569; font-size: 10px; font-weight: 700; }
+.student-notice-category.important { background: #fef3c7; color: #92400e; }
+.student-notice-category.holiday { background: #dbeafe; color: #1d4ed8; }
+.student-notice-category.activities { background: #dcfce7; color: #166534; }
+.pinned-label { background: #fff1f2; color: #be123c; }
+.student-notice-summary { margin: 7px 0 8px; color: #64748b; font-size: 13px; line-height: 1.5; }
+.student-notice details summary { width: fit-content; color: #315c82; font-size: 12px; font-weight: 600; cursor: pointer; }
+.student-notice-details { max-width: 760px; margin: 9px 0 0; color: #475569; font-size: 13px; line-height: 1.6; }
+.notices-empty { margin: 0; padding: 28px 0; color: #64748b; text-align: center; font-size: 14px; }
+@media (max-width: 640px) {
+  .student-notices-page { padding: 13px; }
+  .notices-page-header { gap: 11px; margin-bottom: 15px; }
+  .notices-heading-icon { width: 38px; height: 38px; flex-basis: 38px; font-size: 16px; }
+  .notices-page-header h1 { font-size: 21px; font-weight: 600; }
+  .notices-page-header p:last-child { font-size: 12px; line-height: 1.4; }
+  .notices-panel { padding: 13px; }
+  .notices-toolbar { align-items: stretch; flex-direction: column; }
+  .notices-toolbar h2 { font-size: 15px; font-weight: 600; }
+  .notice-search { width: auto; }
+  .notice-filters { gap: 6px; padding: 11px 0; }
+  .notice-filters button { padding: 6px 9px; font-size: 11px; }
+  .student-notice { grid-template-columns: 42px minmax(0, 1fr); gap: 9px; padding: 13px 2px; }
+  .student-notice-date { min-height: 44px; font-size: 11px; }
+  .student-notice-title-row { gap: 6px; }
+  .student-notice-title-row h3 { font-size: 13px; font-weight: 600; }
+  .student-notice-category, .pinned-label { padding: 3px 6px; font-size: 9px; }
+  .student-notice-summary { margin: 5px 0 7px; font-size: 11px; line-height: 1.4; }
+  .student-notice details summary { font-size: 11px; }
+  .student-notice-details { font-size: 11px; line-height: 1.45; }
+}
+
+@media (max-width: 380px) {
+  .student-notices-page { padding: 10px; }
+  .notices-panel { padding: 11px; }
+}

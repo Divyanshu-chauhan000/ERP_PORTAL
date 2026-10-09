@@ -2,64 +2,104 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-import './../style/login.css'
+import "./../style/login.css";
 import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoginError("");
+    setIsSubmitting(true);
     try {
       const response = await api.post("/auth/login", {
         username: username,
         password: password,
       });
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username" ,  response.data.username)
-        
+      localStorage.setItem("username", response.data.username);
 
       const roleDecode = jwtDecode(response.data.token);
       const role = roleDecode.role;
 
-      if(role === 'student'){
-        navigate('/student-dashboard');
+      if (role === "student") {
+        navigate("/student-dashboard");
+      } else if (role === "teacher") {
+        navigate("/dashboard");
+      } else if (role === "admin") {
+        navigate("/dashboard");
       }
-      else if(role === 'teacher'){
-        navigate('/teacher-dashboard');
-      }
-      else if(role === 'admin'){
-        navigate('/dashboard');
-      }
-
-
     } catch (error) {
-      console.log(error);
+      setLoginError(
+        error.response?.data?.message ||
+          "Unable to sign in. Check your details and try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
   return (
     <div className="login-container">
-      <div  style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '24px', color: '#1e293b' }}>School ERP System</div>
-      <div style={{ padding : '30px' ,  border : "1px solid #e2e8f0" , borderRadius : '8px' , boxShadow : '0 4px 12px rgba(0,0,0,0.05)', width : '100%', maxWidth : '400px',}}>
-        <div style={{ paddingBottom: '16px', fontWeight: 'bold', fontSize: '18px', color: '#475569' }}>
+      <div
+        style={{
+          fontSize: "32px",
+          fontWeight: "bold",
+          marginBottom: "24px",
+          color: "#1e293b",
+        }}
+      >
+        School ERP System
+      </div>
+      <div
+        style={{
+          padding: "30px",
+          border: "1px solid #e2e8f0",
+          borderRadius: "8px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+          width: "100%",
+          maxWidth: "400px",
+        }}
+      >
+        <div
+          style={{
+            paddingBottom: "16px",
+            fontWeight: "bold",
+            fontSize: "18px",
+            color: "#475569",
+          }}
+        >
           Sign in to your account
         </div>
-        <form onSubmit={handleSubmit} style={{display : 'flex' , flexDirection : 'column' }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: "flex", flexDirection: "column" }}
+        >
           <label>User Name</label>
-          <input className="login-input"
+          <input
+            className="login-input"
             type="text"
             name="username"
             id=""
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
-            style={ { margin : '6px 0px 16px 0px' , padding : '8px 12px'  , border : '1px solid #cbd5e1' , borderRadius : '4px' , outline : 'none' }}
+            style={{
+              margin: "6px 0px 16px 0px",
+              padding: "8px 12px",
+              border: "1px solid #cbd5e1",
+              borderRadius: "4px",
+              outline: "none",
+            }}
             required
           />
-          <label htmlFor="" >Password</label>
-          <input className="login-input"
+          <label htmlFor="">Password</label>
+          <input
+            className="login-input"
             type="password"
             name="password"
             id=""
@@ -67,9 +107,35 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required
-           style={ { margin : '6px 0px 16px 0px' , padding : '8px 12px'  , border : '1px solid #cbd5e1' , borderRadius : '4px' , outline : 'none' }}
+            style={{
+              margin: "6px 0px 16px 0px",
+              padding: "8px 12px",
+              border: "1px solid #cbd5e1",
+              borderRadius: "4px",
+              outline: "none",
+            }}
           />
-          <button style={{ padding : '10px 0px' , color : 'white' , backgroundColor : '#1b4cd1' , border : 'none' , cursor : 'pointer', borderRadius : '4px' , marginTop : '10px' , fontWeight : 'bold'}} type="submit">Login</button>
+          {loginError && (
+            <p className="login-error" role="alert">
+              {loginError}
+            </p>
+          )}
+          <button
+            disabled={isSubmitting}
+            style={{
+              padding: "10px 0px",
+              color: "white",
+              backgroundColor: "#1b4cd1",
+              border: "none",
+              cursor: isSubmitting ? "wait" : "pointer",
+              borderRadius: "4px",
+              marginTop: "10px",
+              fontWeight: "bold",
+            }}
+            type="submit"
+          >
+            {isSubmitting ? "Signing in…" : "Login"}
+          </button>
         </form>
       </div>
     </div>

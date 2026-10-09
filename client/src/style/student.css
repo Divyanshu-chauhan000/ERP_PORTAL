@@ -33,3 +33,22 @@
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
+
+.student-table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.student-table table {
+  min-width: 900px;
+}
+
+@media (max-width: 560px) {
+  .student-bar { gap: 12px; padding: 4px 0 10px; }
+  .student-bar h2 { margin: 0; font-size: 20px; font-weight: 600; }
+  .search-std { margin: 0 0 12px; }
+  .searchid-inpt { width: 100%; max-width: 320px; padding: 9px 11px; font-size: 13px; }
+  .add-form { max-width: 100%; }
+}

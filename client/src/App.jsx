@@ -28,19 +28,20 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 import "./App.css";
 import StudentDetail from "./components/StudentDetail";
-import StudentDashboard from './pages/StudentDashboard'
+import StudentDashboard from "./pages/StudentDashboard";
 import StudentProfile from "./pages/StudentProfile";
 import StudentExams from "./pages/StudentExams";
 import StudentFees from "./pages/StudentFees";
 import StudentAttendence from "./pages/StudentAttendence";
+import StudentDocuments from "./pages/StudentDocuments";
+import StudentNotices from "./pages/StudentNotices";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route element={<Layout />}>
-
-      {/* Admin routes here */}
+        {/* Admin routes here */}
         <Route
           path="/dashboard"
           element={
@@ -217,16 +218,72 @@ export default function App() {
             </ProtectedRoute>
           }
         />
-      <Route path="/student/:id" element={<ProtectedRoute><StudentDetail/></ProtectedRoute>}/>
+        <Route
+          path="/student/:id"
+          element={
+            <ProtectedRoute>
+              <StudentDetail />
+            </ProtectedRoute>
+          }
+        />
 
-
-
-      {/* Student routes here */}
-      <Route path='/student-dashboard' element={<ProtectedRoute><StudentDashboard /></ProtectedRoute>} />
-       <Route path='/student-profile' element={<ProtectedRoute><StudentProfile /></ProtectedRoute>} />
-       <Route path='/student-exams' element={<ProtectedRoute><StudentExams /></ProtectedRoute>} />
-       <Route path='/student-fees' element={<ProtectedRoute><StudentFees /></ProtectedRoute>} />
-      <Route path='/student-attendance' element={<ProtectedRoute><StudentAttendence /></ProtectedRoute>} />
+        {/* Student routes here */}
+        <Route
+          path="/student-dashboard"
+          element={
+            <ProtectedRoute>
+              <StudentDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-profile"
+          element={
+            <ProtectedRoute>
+              <StudentProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-exams"
+          element={
+            <ProtectedRoute>
+              <StudentExams />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-fees"
+          element={
+            <ProtectedRoute>
+              <StudentFees />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-attendance"
+          element={
+            <ProtectedRoute>
+              <StudentAttendence />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-documents"
+          element={
+            <ProtectedRoute>
+              <StudentDocuments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-notices"
+          element={
+            <ProtectedRoute>
+              <StudentNotices />
+            </ProtectedRoute>
+          }
+        />
       </Route>
     </Routes>
   );

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./../style/dashboard.css";
-import { NavLink } from "react-router-dom";
 import StatsCard from "../components/StatsCard";
 import api from "../api/axios";
 import Table from "../components/Table";
-
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -47,8 +45,8 @@ export default function Dashboard() {
         console.log(recentStudentRes);
 
         setTableData({
-          recentStudents : recentStudentRes.data
-        })
+          recentStudents: recentStudentRes.data,
+        });
 
         setStats({
           totalStudents: students.data[0].total_students,
@@ -76,7 +74,7 @@ export default function Dashboard() {
           value={stats.totalAttendencePercentage}
         />
       </div>
-      <div style={{ width: "50%" }}>
+      <div className="recent-students-table">
         <Table
           title="Recent Admissions"
           columns={recentStudentColumns}
