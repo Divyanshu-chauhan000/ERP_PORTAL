@@ -3,63 +3,21 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
 import StatsCard from "../components/StatsCard";
-import { FaCalendarCheck, FaChartBar, FaBullhorn } from "react-icons/fa6";
+import {
+  FaCalendarCheck,
+  FaChartBar,
+  FaBullhorn,
+  FaBookOpen,
+} from "react-icons/fa6";
 import { MdOutlineAttachMoney, MdPerson3 } from "react-icons/md";
 import { IoIosPaper } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { CiWarning } from "react-icons/ci";
 import "../style/StudentDashboard.css";
 
-const latestNotices = [
-  {
-    id: 1,
-    title: "Parent-Teacher Meeting",
-    detail: "Parents are requested to meet class teachers on 14 October.",
-    date: "2026-10-09",
-    category: "Important",
-  },
-  {
-    id: 2,
-    title: "Diwali Break Schedule",
-    detail: "The school holiday schedule has been shared for all classes.",
-    date: "2026-10-08",
-    category: "Holiday",
-  },
-  {
-    id: 3,
-    title: "Inter-house Competition",
-    detail: "Submit your names to the class teacher by 12 October.",
-    date: "2026-10-06",
-    category: "Activity",
-  },
-];
+const latestNotices = [];
 
-const fallbackExams = [
-  {
-    id: 1,
-    subject: "Engineering Drawing",
-    category: "Unit Test 1",
-    date: "2025-05-28",
-    time: "10:00 AM - 11:30 AM",
-    color: "blue",
-  },
-  {
-    id: 2,
-    subject: "Mathematics",
-    category: "Mid Term Exam",
-    date: "2025-06-02",
-    time: "10:00 AM - 1:00 PM",
-    color: "green",
-  },
-  {
-    id: 3,
-    subject: "Chemistry",
-    category: "Practical Exam",
-    date: "2025-06-10",
-    time: "02:00 PM - 05:00 PM",
-    color: "purple",
-  },
-];
+const fallbackExams = [];
 
 const toArray = (value) => (Array.isArray(value) ? value : []);
 
@@ -214,6 +172,13 @@ function StudentDashboard() {
       path: "/student-attendance",
       color: "#fdf4ff",
       border: "#a855f7",
+    },
+    {
+      icon: <FaBookOpen size={28} />,
+      label: "Assignments",
+      path: "/student-assignments",
+      color: "#ecfdf5",
+      border: "#0f766e",
     },
   ];
 

@@ -1,0 +1,52 @@
+.student-assignments-page { min-height: 100%; padding: 22px; background: #f8fafc; color: #25394a; }
+.student-assignments-header, .student-assignments-panel { max-width: 1080px; margin-right: auto; margin-left: auto; }
+.student-assignments-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; margin-bottom: 18px; }
+.student-assignment-kicker { margin: 0 0 5px; color: #70818e; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+.student-assignments-header h1 { margin: 0; color: #1d394d; font-size: 23px; font-weight: 600; }
+.student-assignments-header p:last-child { margin: 5px 0 0; color: #748491; font-size: 12px; }
+.student-assignment-count { padding: 8px 11px; border: 1px solid #dde6eb; border-radius: 6px; background: #fff; color: #627786; font-size: 11px; }
+.student-assignments-panel { padding: 17px; border: 1px solid #e1e8ec; border-radius: 8px; background: #fff; }
+.student-assignment-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid #edf1f3; }
+.student-assignment-toolbar h2 { margin: 0; color: #30495a; font-size: 14px; font-weight: 600; }
+.student-assignment-toolbar p { margin: 4px 0 0; color: #83919b; font-size: 10px; }
+.student-assignment-filters { display: flex; flex-wrap: wrap; gap: 5px; }
+.student-assignment-filters button { padding: 5px 8px; border: 1px solid #e1e8eb; border-radius: 5px; background: #fff; color: #637885; font: inherit; font-size: 9px; cursor: pointer; }
+.student-assignment-filters button.active { border-color: #397c70; background: #397c70; color: #fff; }
+.student-assignment-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) 74px; gap: 11px; padding: 14px 2px; border-bottom: 1px solid #edf1f3; }
+.student-assignment-row:last-child { border-bottom: 0; }
+.student-assignment-icon { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 6px; background: #edf4f6; color: #477789; font-size: 13px; }
+.student-assignment-content { min-width: 0; }
+.student-assignment-tags { display: flex; flex-wrap: wrap; gap: 5px; color: #5a7d72; font-size: 9px; }
+.student-assignment-tags span { padding: 3px 6px; border-radius: 4px; background: #f1f6f4; }
+.student-assignment-content h3 { margin: 6px 0 4px; color: #30495a; font-size: 13px; font-weight: 600; }
+.student-assignment-content p { margin: 0; color: #6e7f8b; font-size: 11px; line-height: 1.45; }
+.student-assignment-content .student-assignment-notes { margin-top: 6px; color: #536f65; }
+.student-assignment-resource { display: inline-block; margin-top: 6px; color: #437c70; font-size: 10px; }
+.student-assignment-due { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; color: #82919b; font-size: 9px; }
+.student-assignment-due svg { margin-bottom: 2px; color: #688d80; font-size: 11px; }
+.student-assignment-due strong { color: #435d6c; font-size: 11px; font-weight: 600; }
+.student-assignment-empty, .student-assignment-demo-note { color: #82909a; font-size: 10px; }
+.student-assignment-demo-note { margin: 12px 0 0; }
+
+@media (max-width: 640px) {
+  .student-assignments-page { padding: 13px; }
+  .student-assignments-header { align-items: flex-start; margin-bottom: 12px; }
+  .student-assignments-header h1 { font-size: 19px; }
+  .student-assignments-header p:last-child { font-size: 10px; }
+  .student-assignment-count { padding: 7px 8px; font-size: 9px; }
+  .student-assignments-panel { padding: 12px; }
+  .student-assignment-toolbar { align-items: flex-start; flex-direction: column; }
+  .student-assignment-row { grid-template-columns: 28px minmax(0, 1fr) 54px; gap: 7px; padding: 11px 0; }
+  .student-assignment-icon { width: 26px; height: 26px; font-size: 11px; }
+  .student-assignment-content h3 { font-size: 12px; }
+  .student-assignment-content p { font-size: 10px; }
+  .student-assignment-due { font-size: 8px; }
+  .student-assignment-due strong { font-size: 10px; }
+}
+
+@media (max-width: 380px) {
+  .student-assignments-page { padding: 10px; }
+  .student-assignments-panel { padding: 10px; }
+  .student-assignment-row { grid-template-columns: 24px minmax(0, 1fr) 48px; gap: 6px; }
+  .student-assignment-tags { font-size: 8px; }
+}

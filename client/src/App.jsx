@@ -35,6 +35,15 @@ import StudentFees from "./pages/StudentFees";
 import StudentAttendence from "./pages/StudentAttendence";
 import StudentDocuments from "./pages/StudentDocuments";
 import StudentNotices from "./pages/StudentNotices";
+import TeacherDashboard from "./pages/TeacherDashboard";
+import TeacherClasses from "./pages/TeacherClasses";
+import TeacherAttendance from "./pages/TeacherAttendance";
+import TeacherExams from "./pages/TeacherExams";
+import TeacherTimetable from "./pages/TeacherTimetable";
+import TeacherNotices from "./pages/TeacherNotices";
+import TeacherProfile from "./pages/TeacherProfile";
+import TeacherAssignments from "./pages/TeacherAssignments";
+import StudentAssignments from "./pages/StudentAssignments";
 
 export default function App() {
   return (
@@ -281,6 +290,78 @@ export default function App() {
           element={
             <ProtectedRoute>
               <StudentNotices />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/student-assignments"
+          element={
+            <ProtectedRoute>
+              <StudentAssignments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-dashboard"
+          element={
+            <ProtectedRoute>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-classes"
+          element={
+            <ProtectedRoute>
+              <TeacherClasses />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-attendance"
+          element={
+            <ProtectedRoute>
+              <TeacherAttendance />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-exams"
+          element={
+            <ProtectedRoute>
+              <TeacherExams />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-timetable"
+          element={
+            <ProtectedRoute>
+              <TeacherTimetable />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-notices"
+          element={
+            <ProtectedRoute>
+              <TeacherNotices />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-profile"
+          element={
+            <ProtectedRoute>
+              <TeacherProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/teacher-assignments"
+          element={
+            <ProtectedRoute>
+              <TeacherAssignments />
             </ProtectedRoute>
           }
         />

@@ -10,18 +10,18 @@ const studentPaths = new Set([
   "/student-attendance",
   "/student-documents",
   "/student-notices",
+  "/student-assignments",
 ]);
 
-const staffPaths = new Set([
-  "/dashboard",
-  "/attendences",
-  "/classes",
-  "/exams",
-  "/students",
-  "/addattendence",
-  "/editattendence",
-  "/addexam",
-  "/editexam",
+const teacherPaths = new Set([
+  "/teacher-dashboard",
+  "/teacher-classes",
+  "/teacher-attendance",
+  "/teacher-exams",
+  "/teacher-timetable",
+  "/teacher-notices",
+  "/teacher-profile",
+  "/teacher-assignments",
 ]);
 
 function decodeToken(token) {
@@ -34,8 +34,8 @@ function decodeToken(token) {
 
 function getAllowedRoles(pathname) {
   if (studentPaths.has(pathname)) return ["student"];
-  if (staffPaths.has(pathname) || /^\/student\/[^/]+$/.test(pathname))
-    return ["admin", "teacher"];
+  if (teacherPaths.has(pathname)) return ["teacher"];
+  if (/^\/student\/[^/]+$/.test(pathname)) return ["admin", "teacher"];
   return ["admin"];
 }
 
@@ -52,7 +52,13 @@ export default function ProtectedRoute({ children, allowedRoles }) {
   if (!roles.includes(decoded.role)) {
     return (
       <Navigate
-        to={decoded.role === "student" ? "/student-dashboard" : "/dashboard"}
+        to={
+          decoded.role === "student"
+            ? "/student-dashboard"
+            : decoded.role === "teacher"
+              ? "/teacher-dashboard"
+              : "/dashboard"
+        }
         replace
       />
     );

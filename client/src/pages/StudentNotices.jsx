@@ -1,5 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { FaBullhorn, FaMagnifyingGlass } from "react-icons/fa6";
+import {
+  DEMO_STUDENT_CLASS,
+  TEACHER_NOTICE_KEY,
+  readDemoList,
+  teacherNotices,
+} from "../utils/teacherData";
 import "../style/studentNotices.css";
 
 const notices = [
@@ -44,22 +50,41 @@ const notices = [
   },
 ];
 
-const categories = ["All", "Important", "Holiday", "Activities", "General"];
-
 function StudentNotices() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [search, setSearch] = useState("");
-  const visibleNotices = useMemo(
-    () =>
-      notices.filter((notice) => {
-        const matchesCategory =
-          activeCategory === "All" || notice.category === activeCategory;
-        const text =
-          `${notice.title} ${notice.summary} ${notice.details}`.toLowerCase();
-        return matchesCategory && text.includes(search.trim().toLowerCase());
-      }),
-    [activeCategory, search],
+  const [teacherPosts] = useState(() =>
+    readDemoList(TEACHER_NOTICE_KEY, teacherNotices),
   );
+  const classNotices = teacherPosts
+    .filter(
+      (notice) =>
+        notice.classId === DEMO_STUDENT_CLASS ||
+        (notice.classId === "All assigned" && notice.category !== "Staff"),
+    )
+    .map((notice) => ({
+      id: `teacher-${notice.id}`,
+      title: notice.title,
+      category: notice.category,
+      date: notice.date,
+      summary: notice.detail,
+      details: `For Class ${notice.classId}. Posted by ${notice.author || "Class teacher"}.`,
+      isNew: true,
+    }));
+  const allNotices = [...classNotices, ...notices].sort((first, second) =>
+    second.date.localeCompare(first.date),
+  );
+  const categories = [
+    "All",
+    ...new Set(allNotices.map((notice) => notice.category)),
+  ];
+  const visibleNotices = allNotices.filter((notice) => {
+    const matchesCategory =
+      activeCategory === "All" || notice.category === activeCategory;
+    const text =
+      `${notice.title} ${notice.summary} ${notice.details}`.toLowerCase();
+    return matchesCategory && text.includes(search.trim().toLowerCase());
+  });
 
   return (
     <main className="student-notices-page">
@@ -70,7 +95,7 @@ function StudentNotices() {
         <div>
           <p className="notices-eyebrow">School updates</p>
           <h1>Notices</h1>
-          <p>Announcements and important information from your school.</p>
+          <p>Class {DEMO_STUDENT_CLASS} announcements and school updates.</p>
         </div>
       </header>
       <section className="notices-panel" aria-label="School notices">

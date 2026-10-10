@@ -11,7 +11,13 @@ import { FaCalendarCheck } from "react-icons/fa6";
 import { MdOutlineAttachMoney } from "react-icons/md";
 import { IoIosPaper } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
-import { FaBullhorn, FaFileLines, FaXmark } from "react-icons/fa6";
+import {
+  FaBullhorn,
+  FaFileLines,
+  FaXmark,
+  FaCalendarDays,
+  FaBookOpen,
+} from "react-icons/fa6";
 
 function Sidebar({ onNavigate, onClose }) {
   const role = getRole();
@@ -58,18 +64,38 @@ function Sidebar({ onNavigate, onClose }) {
         path: "/student-documents",
       },
       { icon: <FaBullhorn />, label: "Notices", path: "/student-notices" },
+      {
+        icon: <FaBookOpen />,
+        label: "Assignments",
+        path: "/student-assignments",
+      },
     ],
 
     teacher: [
       {
         icon: <MdDashboardCustomize />,
         label: "Dashboard",
-        path: "/dashboard",
+        path: "/teacher-dashboard",
       },
-      { icon: <PiStudentFill />, label: "Students", path: "/students" },
-      { icon: <MdClass />, label: "Classes", path: "/classes" },
-      { icon: <FaCalendarCheck />, label: "Attendence", path: "/attendences" },
-      { icon: <IoIosPaper />, label: "Exams", path: "/exams" },
+      { icon: <MdClass />, label: "My Classes", path: "/teacher-classes" },
+      {
+        icon: <FaCalendarCheck />,
+        label: "Attendance",
+        path: "/teacher-attendance",
+      },
+      { icon: <IoIosPaper />, label: "Exams & Marks", path: "/teacher-exams" },
+      {
+        icon: <FaCalendarDays />,
+        label: "Timetable",
+        path: "/teacher-timetable",
+      },
+      { icon: <FaBullhorn />, label: "Notices", path: "/teacher-notices" },
+      {
+        icon: <FaBookOpen />,
+        label: "Assignments & Notes",
+        path: "/teacher-assignments",
+      },
+      { icon: <CgProfile />, label: "My Profile", path: "/teacher-profile" },
     ],
   };
 

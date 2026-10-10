@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { FaCalendarCheck, FaTrophy, FaClock, FaBookOpen } from "react-icons/fa";
+import {
+  DEMO_STUDENT_CLASS,
+  DEMO_STUDENT_ID,
+  TEACHER_RESULT_KEY,
+  readDemoList,
+} from "../utils/teacherData";
 import "../style/studentExam.css";
 
 const upcomingExams = [
@@ -73,8 +79,7 @@ const pastResults = [
 ];
 
 const examTypes = ["All Exams", "PT 1", "PT 2", "Mid Term", "Final Exam"];
-const resultTypes = ["All Exams", "PT 1", "Mid Term", "Final Exam"];
-const resultClasses = ["All Classes", "Class 7", "Class 8", "Class 9"];
+const resultTypes = examTypes;
 
 function getDateParts(dateText) {
   const [day, month, year] = dateText.split("-");
@@ -82,12 +87,15 @@ function getDateParts(dateText) {
   return {
     day,
     month: date.toLocaleDateString("en", { month: "short" }).toUpperCase(),
-    fullDate: date.toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    }),
   };
+}
+
+function getGrade(percentage) {
+  if (percentage >= 90) return "A+";
+  if (percentage >= 80) return "A";
+  if (percentage >= 70) return "B";
+  if (percentage >= 60) return "C";
+  return "D";
 }
 
 function StudentExams() {
@@ -95,21 +103,52 @@ function StudentExams() {
   const [examTypeFilter, setExamTypeFilter] = useState("All Exams");
   const [resultClassFilter, setResultClassFilter] = useState("All Classes");
   const [resultTypeFilter, setResultTypeFilter] = useState("All Exams");
+  const [publishedAssessments] = useState(() =>
+    readDemoList(TEACHER_RESULT_KEY, []),
+  );
 
+  const publishedResults = publishedAssessments
+    .filter((assessment) => assessment.classId === DEMO_STUDENT_CLASS)
+    .flatMap((assessment) => {
+      const studentResult = (assessment.students || []).find(
+        (student) => student.studentId === DEMO_STUDENT_ID,
+      );
+      if (!studentResult) return [];
+      const percentage = Math.round(
+        (studentResult.marks / assessment.maxMarks) * 100,
+      );
+      return [
+        {
+          id: `${assessment.id}-${studentResult.studentId}`,
+          subject: assessment.subject,
+          maxMarks: assessment.maxMarks,
+          obtained: studentResult.marks,
+          grade: getGrade(percentage),
+          status: percentage >= 33 ? "Pass" : "Fail",
+          class: `Class ${assessment.classId}`,
+          type: assessment.examType,
+        },
+      ];
+    });
+  const allResults = [...publishedResults, ...pastResults];
+  const resultClasses = [
+    "All Classes",
+    ...new Set(allResults.map((result) => result.class)),
+  ];
   const visibleExams = upcomingExams.filter(
     (exam) => examTypeFilter === "All Exams" || exam.type === examTypeFilter,
   );
-  const visibleResults = pastResults.filter(
+  const visibleResults = allResults.filter(
     (result) =>
       (resultClassFilter === "All Classes" ||
         result.class === resultClassFilter) &&
       (resultTypeFilter === "All Exams" || result.type === resultTypeFilter),
   );
   const averageScore = Math.round(
-    pastResults.reduce(
+    allResults.reduce(
       (sum, result) => sum + (result.obtained / result.maxMarks) * 100,
       0,
-    ) / pastResults.length,
+    ) / allResults.length,
   );
 
   return (
@@ -127,7 +166,7 @@ function StudentExams() {
           </div>
           <div>
             <span>Results</span>
-            <strong>{pastResults.length}</strong>
+            <strong>{allResults.length}</strong>
           </div>
           <div>
             <span>Average</span>
@@ -155,7 +194,7 @@ function StudentExams() {
           onClick={() => setActiveTab("results")}
         >
           <FaTrophy aria-hidden="true" /> Past Results{" "}
-          <span>{pastResults.length}</span>
+          <span>{allResults.length}</span>
         </button>
       </div>
 
@@ -185,7 +224,6 @@ function StudentExams() {
               </select>
             </label>
           </div>
-
           {visibleExams.length ? (
             <div className="student-exam-list">
               {visibleExams.map((exam) => {
@@ -237,9 +275,7 @@ function StudentExams() {
                   onChange={(event) => setResultClassFilter(event.target.value)}
                 >
                   {resultClasses.map((schoolClass) => (
-                    <option key={schoolClass} value={schoolClass}>
-                      {schoolClass}
-                    </option>
+                    <option key={schoolClass}>{schoolClass}</option>
                   ))}
                 </select>
               </label>
@@ -250,15 +286,12 @@ function StudentExams() {
                   onChange={(event) => setResultTypeFilter(event.target.value)}
                 >
                   {resultTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
+                    <option key={type}>{type}</option>
                   ))}
                 </select>
               </label>
             </div>
           </div>
-
           {visibleResults.length ? (
             <div className="student-results-list">
               {visibleResults.map((result) => {
