@@ -38,7 +38,7 @@ const feeMonths = [
     other: 500,
     total: 14300,
     status: "Upcoming",
-    due: 14300,
+    due: 143000,
   },
   {
     month: "August",
