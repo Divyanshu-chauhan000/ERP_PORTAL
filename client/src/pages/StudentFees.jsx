@@ -11,11 +11,13 @@ const feeMonths = [
     status: "Paid",
     due: 0,
   },
+
+
   {
     month: "May",
     tuition: 12000,
     transport: 1800,
-    other: 500,
+    other: 5000,
     total: 14300,
     status: "Paid",
     due: 0,
